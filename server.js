@@ -43,6 +43,9 @@ app.use((req,res,next)=>{
 });
 
 //Routes
+app.get('/', (req, res) => {
+    res.send("Hello");
+});
 app.use('/api',authRoutes);
 app.use('/api',donorRoutes);
 app.use('/api',agentRoutes)
