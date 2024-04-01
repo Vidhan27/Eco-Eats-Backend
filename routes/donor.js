@@ -10,7 +10,7 @@ router.get("/donor/dashboard", middleware.ensureDonorLoggedIn, async (req, res) 
         const TotalDonations = await Donation.countDocuments({ donor: donorId });
         const EWasteDonations = await Donation.countDocuments({ donor: donorId, wasteType:"ewaste" });
         const FoodDonations = await Donation.countDocuments({ donor: donorId, wasteType: "foodwaste" });
-        const ClothsDonations = await Donation.countDocuments({ donor: donorId, status: "clothwaste" });
+        const ClothsDonations = await Donation.countDocuments({ donor: donorId, wasteType: "clothwaste" });
 
         res.json({
             title: "Dashboard",
