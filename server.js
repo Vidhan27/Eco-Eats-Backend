@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const corsConfig = {
-    origin:['https://eco-eats-backend-51lq2pgdj-vidhan-prajapatis-projects.vercel.app/','http://localhost:5173/'],//First two are frontend and Last one is for backend
-    credentials : true,
-    methods :['GET','POST','PUT','DELETE'],
+    origin: ['https://eco-eats-backend-51lq2pgdj-vidhan-prajapatis-projects.vercel.app/', 'http://localhost:5173'], // Add 'http://localhost:5173' as an allowed origin
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
 app.options("",cors(corsConfig));
 app.use(cors(corsConfig));
