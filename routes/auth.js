@@ -44,7 +44,7 @@ router.post("/auth/signup", middleware.ensureNotLoggedIn, async (req, res) => {
 router.post("/auth/login", middleware.ensureNotLoggedIn,
     passport.authenticate('local', { failureFlash: true }),
     (req, res) => {
-        res.json({ redirect: `${req.user.role}/dashboard` });
+        res.json({ redirect: `${req.user.role}/dashboard`, role:req.user.role });
     });
 
     router.get("/auth/logout", (req, res) => {

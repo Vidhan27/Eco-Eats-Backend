@@ -7,12 +7,13 @@ const Donation = require("../models/donation.js");
 router.get("/agent/dashboard", middleware.ensureAgentLoggedIn, async (req,res) => {
 	const agentId = req.user._id;
 	const numDonors = await User.countDocuments({ role: "donor" });
-	const numPendingDonations = await Donation.countDocuments({ status: "pending" });
-	const numAcceptedDonations = await Donation.countDocuments({ status: "accepted" });
-	const numCollectedDonations = await Donation.countDocuments({status: "collected" });
+	const TotalDonations = await Donation.countDocuments({ status:['pending','accepted','collected'] });
+	const EWasteDonations = await Donation.countDocuments({  wasteType:"ewaste" });
+	const FoodDonations = await Donation.countDocuments({  wasteType: "foodwaste" });
+	const ClothsDonations = await Donation.countDocuments({  wasteType: "clothwaste" });
 	res.json({
 		title: "Dashboard",
-		 numCollectedDonations , numDonors , numPendingDonations , numAcceptedDonations
+		 TotalDonations , numDonors , EWasteDonations, FoodDonations, ClothsDonations
 	});
 });
 
