@@ -4,11 +4,12 @@ const cors = require('cors');
 const allowedOrigins = ['http://localhost:5173', 'https://eco-eats-backend.vercel.app/'];
 
 const corsConfig = {
-    origin:['http://localhost:5173', 'https://eco-eats-backend.vercel.app'];,//First two are frontend and Last one is for backend
-    credentials : true,
-    methods :['GET','POST','PUT','DELETE'],
+    origin: ['http://localhost:5173', 'https://eco-eats-backend.vercel.app'], // First two are frontend and Last one is for backend
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
-app.options("",cors(corsConfig));
+
+app.options("*", cors(corsConfig)); // Allow preflight requests for all routes
 app.use(cors(corsConfig));
 
 const passport = require('passport');
