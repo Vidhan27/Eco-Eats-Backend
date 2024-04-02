@@ -3,21 +3,13 @@ const app = express();
 const cors = require('cors');
 const allowedOrigins = ['http://localhost:5173', 'https://eco-eats-backend.vercel.app/'];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      // Allow requests from the specified origins
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
-    credentials: true, // Allow sending cookies and other credentials
-  })
-);
+const corsConfig = {
+    origin:["http://localhost:5173",'https://eco-eats-delta.vercel.app/','https://waste-donation-backend.vercel.app/'],//First two are frontend and Last one is for backend
+    credentials : true,
+    methods :['GET','POST','PUT','DELETE'],
+};
+app.options("",cors(corsConfig));
+app.use(cors(corsConfig));
 
 const passport = require('passport');
 const flash = require('connect-flash');
