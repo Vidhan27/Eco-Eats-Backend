@@ -30,10 +30,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
     secret: 'your_secret_key',
-    resave: true,
+    resave: false,
     saveUninitialized: true,
-    secure: true, // Set to true if using HTTPS
-    sameSite: 'none' // Required for cross-site cookies
 }));
 
 app.use(passport.initialize());
