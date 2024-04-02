@@ -31,8 +31,9 @@ app.use(express.json());
 app.use(session({
     secret:"secret",
     resave:true,
+    secure:true,
     saveUninitialized:true,
-    cookie: { secure: true, sameSite: 'none', domain: '.vercel.app' } // Add this line
+    SameSite:'none',
 }));
 
 app.use(passport.initialize());
