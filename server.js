@@ -29,11 +29,7 @@ require('./config/passport')(passport);
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
-    secret:"secret",
-    resave:true,
-    secure:true,
-    saveUninitialized:true,
-    SameSite:'none',
+    Secure:true,
 }));
 
 app.use(passport.initialize());
