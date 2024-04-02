@@ -30,6 +30,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
     Secure:true,
+    SameSite:'none'
 }));
 
 app.use(passport.initialize());
