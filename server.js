@@ -26,10 +26,16 @@ require('./config/passport')(passport);
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
-    secret:"secret",
-    resave:true,
-    saveUninitialized:true
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        secure: true, // set this to true if you're using HTTPS
+        sameSite: 'none', // set this to 'none' if your frontend and backend are on different domains
+        httpOnly: true, // set this to true to prevent client-side JavaScript from accessing the cookie
+    }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
