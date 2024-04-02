@@ -5,7 +5,7 @@ const allowedOrigins = ['http://localhost:5173', 'https://eco-eats-backend.verce
 
 const corsConfig = {
     origin:["http://localhost:5173",'https://eco-eats-delta.vercel.app/','https://waste-donation-backend.vercel.app/'],//First two are frontend and Last one is for backend
-    credentials : true,
+    // credentials : true,
     methods :['GET','POST','PUT','DELETE'],
 };
 app.options("",cors(corsConfig));
