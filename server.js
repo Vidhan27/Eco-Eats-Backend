@@ -33,6 +33,7 @@ app.use(session({
     secret:'secret',
     store:new MongoStore({mongoUrl:process.env.MONGODB_URI}),
     resave:false,
+    secure:true.
     saveUninitialized:false,
 }));
 
