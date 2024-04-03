@@ -15,6 +15,7 @@ app.use(cors(corsConfig));
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
 
 const authRoutes = require('./routes/auth');
@@ -29,15 +30,10 @@ require('./config/passport')(passport);
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie:{
-        domain:'.vercel.app',
-        path:'/',
-        secure:true,
-        httpOnly:true
-    }
+    secret:'secret',
+    store:new MongoStore({mongoUrl:process.env.MONGO_URI}),
+    resave:false,
+    saveUninitialized:false,
 }));
 
 app.use(passport.initialize());
