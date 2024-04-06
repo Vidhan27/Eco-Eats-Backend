@@ -46,17 +46,18 @@ router.post("/auth/login", middleware.ensureNotLoggedIn,
     (req, res) => {
         res.json({ redirect: `${req.user.role}/dashboard`, role:req.user.role });
     });
-
     router.get("/auth/logout", (req, res) => {
         req.logout((err) => {
-          if (err) {
-            // Handle any error that occurred during logout
-            return res.status(500).json({ message: 'Error occurred during logout' });
-          }
-          // Logout successful
-          res.json({ message: 'You are logged out' });
+            if (err) {
+                // Handle any error that occurred during logout
+                return res.status(500).json({ message: 'Error occurred during logout' });
+            } 
+    
+            // Clear the cookie on server side
+            res.clearCookie('connect.sid', { path: '/' }); // use the same path you set the cookie on
+    
+            // Logout successful
+            res.json({ message: 'You are logged out' });
         });
-      });
-      
-
+    });
 module.exports = router;

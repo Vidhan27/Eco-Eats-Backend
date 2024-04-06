@@ -20,8 +20,32 @@ router.get("/agent/dashboard", middleware.ensureAgentLoggedIn, async (req,res) =
 router.get("/agent/donations/pending", middleware.ensureAgentLoggedIn, async (req,res) => {
 	try
 	{
-		const pendingCollections = await Donation.find({  status:[ "pending","accepted"] }).populate("donor");
+		const pendingCollections = await Donation.find({  status:[ "pending"] }).populate("donor");
 		res.json({ title: "Pending Collections", pendingCollections });
+	}
+	catch(err)
+	{
+		console.log(err);
+		res.status(500).json({ message: 'Some error occurred on the server.' });
+	}
+});
+router.get("/agent/donations/accepted", middleware.ensureAgentLoggedIn, async (req,res) => {
+	try
+	{
+		const acceptedCollections = await Donation.find({  status:[ "accepted"] }).populate("donor");
+		res.json({ title: "Accepted Collections", acceptedCollections });
+	}
+	catch(err)
+	{
+		console.log(err);
+		res.status(500).json({ message: 'Some error occurred on the server.' });
+	}
+});
+router.get("/agent/donations/rejected", middleware.ensureAgentLoggedIn, async (req,res) => {
+	try
+	{
+		const rejectedCollections = await Donation.find({  status:[ "rejected"] }).populate("donor");
+		res.json({ title: "Rejected", rejectedCollections });
 	}
 	catch(err)
 	{
