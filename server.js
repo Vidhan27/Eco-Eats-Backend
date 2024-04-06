@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const allowedOrigins = ['http://localhost:5173', 'https://eco-eats-backend.vercel.app/'];
+const MongoStore = require('connect-mongo');
 
 const corsConfig = {
 
@@ -32,11 +32,15 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
     secret:'secret',
-    store:new MongoStore({mongoUrl:process.env.MONGODB_URI}),
     resave:false,
-    secure: false, // set to false if not in production
-    sameSite: 'none', // set to 'lax' if not in production
-    saveUninitialized:false,
+    saveUninitialized:true,
+    store:new MongoStore({mongoUrl:process.env.MONGODB_URI,collectionName:"sessions"}),
+    cookie:{
+        maxAge:1000*60*60*24,
+        secure:true,
+        sameSite:'none',
+    }
+    
 }));
 
 app.use(passport.initialize());
