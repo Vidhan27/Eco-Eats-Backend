@@ -30,8 +30,8 @@ require('./config/passport')(passport);
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
-    'secret':'secret',
-    'resave':false,
+    'secret':'keyboard-cat',
+    'resave':true,
     'saveUninitialized':true,
     'store': new MongoStore({mongoUrl:process.env.MONGODB_URI,collectionName:"sessions"}),
     'cookie':{
