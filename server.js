@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const corsConfig = {
 
-    origin: ['http://localhost:5173', 'https://eco-eats-backend.vercel.app'], // First two are frontend and Last one is for backend
+    origin: ['http://localhost:5173', 'https://eco-eats-backend.vercel.app','https://eco-eats-backend-vidhan-prajapatis-projects.vercel.app'], // First two are frontend and Last one is for backend
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
