@@ -36,7 +36,7 @@ app.use(session({
     'store': new MongoStore({mongoUrl:process.env.MONGODB_URI,collectionName:"sessions"}),
     'cookie':{
         'maxAge':1000*60*60*24,
-        'secure':false,
+        'secure':true,
         'httpOnly': true,
         'sameSite':'lax',
         'domain':'.vercel.app',
