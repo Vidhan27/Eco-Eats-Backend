@@ -36,9 +36,9 @@ app.use(session({
     'store': new MongoStore({mongoUrl:process.env.MONGODB_URI,collectionName:"sessions"}),
     'cookie':{
         'maxAge':1000*60*60*24,
-        'secure':true,
+        'secure':false,
         'httpOnly': false,
-        'sameSite':'none',
+        'sameSite':'lax',
     }
     
 }));
