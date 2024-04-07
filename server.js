@@ -38,7 +38,7 @@ app.use(session({
         'maxAge':1000*60*60*24,
         'secure':true,
         'httpOnly': true,
-        'sameSite':'lax',
+        'sameSite':'None',
         'domain':'.vercel.app',
     }
     
