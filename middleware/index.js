@@ -1,29 +1,41 @@
 const middleware = {
     ensureLoggedIn: (req, res, next) => {
-        if (req.isAuthenticated()) {
-            return next();
+        try{
+            if (req.isAuthenticated()) {
+                return next();
+            }
+            res.status(401).json({ message: 'You need to login first' });
+        }catch(err){
+            console.log(err)
         }
-        res.status(401).json({ message: 'You need to login first' });
     },
 
     ensureAgentLoggedIn: (req, res, next) => {
-        if (req.isUnauthenticated()) {
+       try{
+            if (req.isUnauthenticated()) {
             return res.status(401).json({ message: 'You need to login first' });
         }
         if (!req.user || req.user.role != 'agent') {
             return res.status(403).json({ message: 'This page is only accessible to agents' });
         }
         next();
+       }catch(err){
+           console.log(err)
+       }
     },
 
     ensureDonorLoggedIn: (req, res, next) => {
-        if (req.isUnauthenticated()) {
-            return res.status(401).json({ message: 'You need to login first' });
+        try{
+                    if (req.isUnauthenticated()) {
+                return res.status(401).json({ message: 'You need to login first' });
+            }
+            if (!req.user || req.user.role != 'donor') {
+                return res.status(403).json({ message: 'This page is only accessible to donors' });
+            }
+            next();
+        }catch(err){
+            console.log(err)
         }
-        if (!req.user || req.user.role != 'donor') {
-            return res.status(403).json({ message: 'This page is only accessible to donors' });
-        }
-        next();
     },
 
     ensureNotLoggedIn: (req, res, next) => {
