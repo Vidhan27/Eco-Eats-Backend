@@ -26,8 +26,6 @@ require("dotenv").config();
 require("./config/dbConnection.js")();
 require('./config/passport')(passport);
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -38,7 +36,7 @@ app.use(session({
   store: new MongoStore({ mongoUrl: process.env.MONGODB_URI, collectionName: 'sessions' }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24,
-    secure: isProduction, // Set 'secure' to true only in production
+    secure: true, // Set 'secure' to true only in production
     sameSite: 'None',
     httpOnly: true,
   }
