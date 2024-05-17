@@ -45,6 +45,10 @@ router.post("/auth/login", middleware.ensureNotLoggedIn,
     passport.authenticate('local', { failureFlash: true }),
     (req, res) => {
         res.json({ redirect: `${req.user.role}/dashboard`, role:req.user.role });
+         // Set session cookie if not already set
+        if (!req.session.user) {
+            req.session.user = req.user;
+        }
     });
     router.get("/auth/logout", (req, res) => {
         req.logout((err) => {
