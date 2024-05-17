@@ -15,7 +15,6 @@ app.use(cors(corsConfig));
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session)
 const methodOverride = require('method-override');
 
 const authRoutes = require('./routes/auth');
