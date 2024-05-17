@@ -32,6 +32,8 @@ app.use(session({
   secret: 'keyboard-cat',
   resave: true,
   saveUninitialized: false,
+  secure:true,
+  sameSite:'None',
 }));
 
 app.use((req, res, next) => {
