@@ -31,7 +31,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
   secret: 'keyboard-cat',
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   store: new MongoStore({ mongoUrl: process.env.MONGODB_URI, collectionName: 'sessions' }),
   cookie: {
