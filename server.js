@@ -28,13 +28,17 @@ require('./config/passport')(passport);
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(session({
-  secret: 'keyboard-cat',
-  resave: true,
-  saveUninitialized: false,
-  secure:true,
-  sameSite:'None',
-}));
+    app.use(
+      session({
+        secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+        resave: true,
+        saveUninitialized: false,
+        cookie: {
+          sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+          secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
+        }
+      })
+   );
 
 app.use((req, res, next) => {
     console.log('Session:', req.session);
