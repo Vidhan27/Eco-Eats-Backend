@@ -33,13 +33,6 @@ app.use(session({
   secret: 'keyboard-cat',
   resave: true,
   saveUninitialized: false,
-  store: new MongoStore({ mongoUrl: process.env.MONGODB_URI, collectionName: 'sessions' }),
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24,
-    secure: true, // Set 'secure' to true only in production
-    sameSite: 'None',
-    httpOnly: true,
-  }
 }));
 
 app.use((req, res, next) => {
